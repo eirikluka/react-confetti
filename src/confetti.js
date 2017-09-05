@@ -16,6 +16,7 @@ function confetti(canvasObj) {
     '#FF5722', '#795548',
   ]
   let opacity = 1.0
+  let recycle = true
 
   function self() {
     const canvas = canvasObj
@@ -92,7 +93,7 @@ function confetti(canvasObj) {
       context.restore()
     }
 
-    function ParticleGenerator(x, y, w, h, number, text) {
+    function ParticleGenerator(x, y, w, h, number, r, text) {
       // particle will spawn in this aera
       this.x = x
       this.y = y
@@ -101,7 +102,7 @@ function confetti(canvasObj) {
       this.number = number
       this.particles = []
       this.text = text
-      this.recycle = true
+      this.recycle = r
       this.type = 1
     }
     ParticleGenerator.prototype.animate = function animateParticle() {
@@ -141,7 +142,7 @@ function confetti(canvasObj) {
       }
     }
 
-    const generator1 = new ParticleGenerator(0, 0, W, 0, numberOfPieces)
+    const generator1 = new ParticleGenerator(0, 0, W, 0, numberOfPieces, recycle)
 
     function toggleEngine() {
       if(generator1.type === 0) {
@@ -205,6 +206,12 @@ function confetti(canvasObj) {
   self.opacity = (...args) => {
     if(!args.length) { return opacity }
     opacity = args[0]
+    return self
+  }
+
+  self.recycle = (...args) => {
+    if(!args.length) { return recycle }
+    recycle = args[0]
     return self
   }
 

@@ -13,6 +13,7 @@ export default class Confetti extends React.Component {
     gravity: PropTypes.number,
     colors: PropTypes.arrayOf(PropTypes.string),
     opacity: PropTypes.number,
+    recycle: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -28,7 +29,8 @@ export default class Confetti extends React.Component {
       '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800',
       '#FF5722', '#795548',
     ],
-    opacity: 1.0
+    opacity: 1.0,
+    recycle: true,
   }
 
   componentDidMount() {
@@ -38,7 +40,8 @@ export default class Confetti extends React.Component {
       .wind(this.props.wind)
       .gravity(this.props.gravity)
       .colors(this.props.colors)
-      .opacity(this.props.opacity)()
+      .opacity(this.props.opacity)
+      .recycle(this.props.recycle)()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -49,6 +52,7 @@ export default class Confetti extends React.Component {
       .gravity(nextProps.gravity)
       .colors(nextProps.colors)
       .opacity(nextProps.opacity)
+      .recycle(nextProps.recycle)
   }
 
   render() {
@@ -63,6 +67,7 @@ export default class Confetti extends React.Component {
       gravity,
       colors,
       opacity,
+      recycle,
       /* eslint-enable no-unused-vars */
       ...passedProps,
     } = this.props
